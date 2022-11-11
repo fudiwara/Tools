@@ -1,5 +1,4 @@
-# com d0 l0 d1 l1 ...
-# python combine_dataset.py /Users/tfuji/work/hep/dataset_comb/ _hep_train_list.txt /Users/tfuji/work/hep/worker1 /Users/tfuji/work/hep/worker1/_yolo_train_list.txt /Users/tfuji/work/hep/worker2_sq /Users/tfuji/work/hep/worker2_sq/_yolo_train_list.txt /Users/tfuji/work/hep/worker3_1 /Users/tfuji/work/hep/worker3_1/_yolo_train_list.txt /Users/tfuji/work/hep/worker3_2sq /Users/tfuji/work/hep/worker3_2sq/_yolo_train_list.txt /Users/tfuji/work/hep/worker3_3 /Users/tfuji/work/hep/worker3_3/_yolo_train_list.txt
+# com outdir outlist d0 l0 d1 l1 ...
 
 import sys
 sys.dont_write_bytecode = True
