@@ -39,9 +39,9 @@ while(True):
     ret, img = cap.read()
     
     if ret:
-        histo_b = gen_3ch_histogram(img, 0, (0, 0, 255))
+        histo_b = gen_3ch_histogram(img, 0, (255, 0, 0))
         histo_g = gen_3ch_histogram(img, 1, (0, 255, 0))
-        histo_r = gen_3ch_histogram(img, 2, (255, 0, 0))
+        histo_r = gen_3ch_histogram(img, 2, (0, 0, 255))
         img_l = cv2.vconcat([img, img_sp])
         img_r = cv2.vconcat([histo_r, histo_g, histo_b])
         frame = cv2.hconcat([img_l, img_r])
