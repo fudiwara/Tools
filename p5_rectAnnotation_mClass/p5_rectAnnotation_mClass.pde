@@ -6,7 +6,7 @@ int label_number = 0;
 
 String list_file_name = "_train_list.csv"; // 保存されるファイル名
 float img_scale = 1.1;
-String file_exts[] = {".jpg", ".png"}, buf_str;
+String file_exts[] = {".jpg", ".png", ".JPG", ".PNG"}, buf_str;
 File baseDir;
 String img_list[], img_name_list[];
 int img_idx = 0, numImg, add_val;
