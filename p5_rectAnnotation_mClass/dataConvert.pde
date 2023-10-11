@@ -6,25 +6,29 @@ void anFile2Table(){
   if(src == null) return;
   println(numImg, src.getColumnCount() / 5);
   String img_file_name;
+  int src_i = 0; // 追加ファイルがある場合は元のリストとidxが変わるので
   for(i = 0; i < numImg; i++){
-    img_file_name = src.getString(i, 0);
+    img_file_name = src.getString(src_i, 0);
     //print(img_file_name, img_name_list.get(i));
     if(img_name_list[i].equals(img_file_name)){
       print(img_file_name, " ");
       for(j = 0; j < src.getColumnCount() / 5; j++){
         boolean isUse = false;
         for(u = 0; u < 5; u++){
-          int val = src.getInt(i, 1 + j * 5 + u);
+          int val = src.getInt(src_i, 1 + j * 5 + u);
           if(val != 0) isUse = true;
           //print(val, " ");
         }
         if(isUse){
           for(u = 0; u < 5; u++){
-            ans.get(i).add(src.getInt(i, 1 + j * 5 + u));
+            ans.get(i).add(src.getInt(src_i, 1 + j * 5 + u));
           }
         }
       }
       println();
+      src_i++;
+    }else{
+      println(img_file_name, ": new file");
     }
   }
 }

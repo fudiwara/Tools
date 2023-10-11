@@ -1,3 +1,4 @@
+// セーブ後の画像追加処理
 ArrayList<defRect> rc = new ArrayList<defRect>();
 int NUM_rc = 1;
 int wrok_id = 0;
@@ -6,7 +7,7 @@ int label_number = 0;
 
 String list_file_name = "_train_list.csv"; // 保存されるファイル名
 float img_scale = 1.1;
-String file_exts[] = {".jpg", ".png", ".JPG", ".PNG"}, buf_str;
+String file_exts[] = {".jpg", ".JPG", ".png", ".PNG", ".jpeg", ".JPEG"}, buf_str;
 File baseDir;
 String img_list[], img_name_list[];
 int img_idx = 0, numImg, add_val;
@@ -31,7 +32,7 @@ void loadImageDisp(int i){
 void imagesPathDir(File selDIr){
   int i;
   StringList ipl, inl;
-  baseDir = selDIr;
+  baseDir = selDIr; // ベースのディレクトリ
   File files[] = listFiles(baseDir);
   ipl = new StringList();
   inl = new StringList();
@@ -183,7 +184,7 @@ void keyPressed(){
   if(key == 'y'){
     setRc2Table();
     outputYoloList();
-    println("done yolo list");
+    println("done space format list");
   }
   
   if(key == 'e'){
