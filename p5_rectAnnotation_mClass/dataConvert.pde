@@ -53,7 +53,7 @@ void table2anFile(){
 }
 
 // yolo形式で保存
-void outputYoloList(){
+void outputTrainList(){
   int i, j, n, outputNum = 0, c = 0;
   
   for(i = 0; i < numImg; i++) if(0 < ans.get(i).size()) outputNum++;
@@ -102,4 +102,61 @@ void outputEffDetList(){
     }
   }
   saveStrings(baseDir + "/_train_list_part.txt", listsStr);
+}
+
+
+void imgAn2Xml(){
+  String folder_name = "data_yolo";
+  String annotation_labels[] = {"worker", "obj1", "obj2", "obj3", "obj4"};
+  String pose_state = "Unspecified"
+  String dirPath = baseDir + "/xmls";
+  //println(dirPath);
+  File xmlDir = new File(dirPath);
+  xmlDir.mkdir();
+  int i, j;
+  
+  for(i = 0; i < numImg; i++){
+    String fileName = img_name_list[i];
+    //println(ans.get(i).size());
+    if(ans.get(i).size() < 5) continue;
+    String xmlName = dirPath + "/" + fileName.substring(0, fileName.lastIndexOf('.')) + ".xml";
+    XML xml = new XML("annotation");
+    XML nc, ncs, nco, ncob;
+    nc = xml.addChild("folder");
+    nc.setContent(folder_name);
+    nc = xml.addChild("filename");
+    nc.setContent(img_name_list[i]);
+    
+    nc = xml.addChild("size");
+    ncs = nc.addChild("width");
+    ncs.setContent(str(imageWidth.get(i)));
+    ncs = nc.addChild("height");
+    ncs.setContent(str(imageHeight.get(i)));
+    ncs = nc.addChild("depth");
+    ncs.setContent("3");
+    
+    for(j = 0; j < ans.get(i).size() / 5; j++){
+      nc = xml.addChild("object");
+      nco = nc.addChild("name");
+      nco.setContent( annotation_labels[ans.get(i).get(j * 5 + 4)] );
+      nco = nc.addChild("pose");
+      nco.setContent(pose_state);
+      nco = nc.addChild("truncated");
+      nco.setContent("0");
+      nco = nc.addChild("difficult");
+      nco.setContent("0");
+      
+      nco = nc.addChild("bndbox");
+      ncob = nco.addChild("xmin");
+      ncob.setContent(str(ans.get(i).get(j * 5 + 0)));
+      ncob = nco.addChild("ymin");
+      ncob.setContent(str(ans.get(i).get(j * 5 + 1)));
+      ncob = nco.addChild("xmax");
+      ncob.setContent(str(ans.get(i).get(j * 5 + 2)));
+      ncob = nco.addChild("ymax");
+      ncob.setContent(str(ans.get(i).get(j * 5 + 3)));
+    }
+    saveXML(xml, xmlName);
+  }
+  
 }

@@ -181,9 +181,15 @@ void keyPressed(){
     println("done save");
   }
   
-  if(key == 'y'){
+  if(key == 't'){
     setRc2Table();
     outputYoloList();
+    println("done space format list");
+  }
+  
+  if(key == 'l'){
+    setRc2Table();
+    outputTrainList();
     println("done space format list");
   }
   
