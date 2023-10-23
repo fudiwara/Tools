@@ -181,19 +181,19 @@ void keyPressed(){
     println("done save");
   }
   
-  if(key == 't'){
+  if(key == 't'){ // txt
     setRc2Table();
-    outputYoloList();
+    imgAn2Xml();
     println("done space format list");
   }
   
-  if(key == 'l'){
+  if(key == 'l'){ // list
     setRc2Table();
     outputTrainList();
     println("done space format list");
   }
   
-  if(key == 'e'){
+  if(key == 'e'){ // effdet
     setRc2Table();
     outputEffDetList();
     println("done ssd & effdet list");

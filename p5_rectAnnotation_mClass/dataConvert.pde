@@ -52,7 +52,7 @@ void table2anFile(){
   saveTable(dst, baseDir + "/" + list_file_name);
 }
 
-// yolo形式で保存
+// 1行毎にファイル名と矩形情報がスペース区切りになる形式で保存
 void outputTrainList(){
   int i, j, n, outputNum = 0, c = 0;
   
@@ -108,7 +108,7 @@ void outputEffDetList(){
 void imgAn2Xml(){
   String folder_name = "data_yolo";
   String annotation_labels[] = {"worker", "obj1", "obj2", "obj3", "obj4"};
-  String pose_state = "Unspecified"
+  String pose_state = "Unspecified";
   String dirPath = baseDir + "/xmls";
   //println(dirPath);
   File xmlDir = new File(dirPath);
