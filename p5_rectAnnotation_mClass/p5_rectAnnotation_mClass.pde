@@ -3,7 +3,7 @@ ArrayList<defRect> rc = new ArrayList<defRect>();
 int NUM_rc = 1;
 int wrok_id = 0;
 int state = 0;
-int label_number = 0;
+int label_number = 1;
 
 String list_file_name = "_train_list.csv"; // 保存されるファイル名
 float img_scale = 1.1;
