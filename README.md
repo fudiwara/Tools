@@ -15,3 +15,6 @@ Processingで動作します
 
 ### USBカメラ用のワーピングのテストプログラム
 chk_camera_warp_perspective
+
+### MediaPipeによる顔検出結果を画像出力するプログラム
+face_det_output_crop_img.py
