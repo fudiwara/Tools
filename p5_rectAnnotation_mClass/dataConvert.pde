@@ -2,8 +2,12 @@
 void anFile2Table(){
   int i, j, u;
   Table src = null;
-  src = loadTable(baseDir + "/" + list_file_name);
-  if(src == null) return;
+  String filePath = baseDir + File.separator + list_file_name;
+  println(filePath);
+  File file = new File(filePath);
+  println(file.exists());
+  if(!file.exists()) return;
+  src = loadTable(filePath);
   println(numImg, src.getColumnCount() / 5);
   String img_file_name;
   int src_i = 0; // 追加ファイルがある場合は元のリストとidxが変わるので
@@ -49,7 +53,7 @@ void table2anFile(){
       dst.setInt(i, j + 1, ans.get(i).get(j));
     }
   }
-  saveTable(dst, baseDir + "/" + list_file_name);
+  saveTable(dst, baseDir + File.separator + list_file_name);
 }
 
 // 1行毎にファイル名と矩形情報がスペース区切りになる形式で保存
@@ -76,7 +80,7 @@ void outputTrainList(){
       c++;
     }
   }
-  saveStrings(baseDir + "/_train_list_space.txt", listsStr);
+  saveStrings(baseDir + File.separator + "_train_list_space.txt", listsStr);
 }
 
 // pytorch系ssdとかeffdet用のリストに保存
@@ -101,7 +105,7 @@ void outputEffDetList(){
       }
     }
   }
-  saveStrings(baseDir + "/_train_list_part.txt", listsStr);
+  saveStrings(baseDir + File.separator + "_train_list_part.txt", listsStr);
 }
 
 
@@ -109,7 +113,7 @@ void imgAn2Xml(){
   String folder_name = "data_yolo";
   String annotation_labels[] = {"worker", "obj1", "obj2", "obj3", "obj4"};
   String pose_state = "Unspecified";
-  String dirPath = baseDir + "/xmls";
+  String dirPath = baseDir + File.separator + "xmls";
   //println(dirPath);
   File xmlDir = new File(dirPath);
   xmlDir.mkdir();
@@ -119,7 +123,7 @@ void imgAn2Xml(){
     String fileName = img_name_list[i];
     //println(ans.get(i).size());
     if(ans.get(i).size() < 5) continue;
-    String xmlName = dirPath + "/" + fileName.substring(0, fileName.lastIndexOf('.')) + ".xml";
+    String xmlName = dirPath + File.separator + fileName.substring(0, fileName.lastIndexOf('.')) + ".xml";
     XML xml = new XML("annotation");
     XML nc, ncs, nco, ncob;
     nc = xml.addChild("folder");

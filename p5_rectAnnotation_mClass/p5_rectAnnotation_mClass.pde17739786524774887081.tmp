@@ -26,8 +26,8 @@ void loadImageDisp(int i){
   for (int x = 0; x < buf.pixels.length; x++) buf.pixels[x] = color(add_val); 
   buf.updatePixels();
   dispImg.blend(buf, 0, 0, dispImg.width, dispImg.height, 0, 0, dispImg.width, dispImg.height, ADD);
-  surface.setResizable(true);
   surface.setSize(dispImg.width, dispImg.height);
+  println("disp: " + path);
 }
 
 void imagesPathDir(File selDIr){
