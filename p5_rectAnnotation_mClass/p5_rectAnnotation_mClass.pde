@@ -185,7 +185,7 @@ void keyPressed(){
   if(key == 't'){ // txt
     setRc2Table();
     imgAn2Xml();
-    println("done space format list");
+    println("done xml format list");
   }
   
   if(key == 'l'){ // list
