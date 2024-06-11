@@ -33,17 +33,33 @@ class defRect{
     }else if(stateRectmode == 1){
       x2 = mouseX;
       y2 = mouseY;
-      chkCornerVal(); // x1, y1, x2, y2だと±の関係があれので調整
+      
+      if(x1 < 0) x1 = 0;
+      if(y1 < 0) y1 = 0;
+      if(dispImg.width <= x2) x2 = dispImg.width - 1;
+      if(dispImg.height <= y2) y2 = dispImg.height - 1;
+      if(x2 < 0) x2 = 0;
+      if(y2 < 0) y2 = 0;
+      if(dispImg.width <= x1) x1 = dispImg.width - 1;
+      if(dispImg.height <= y1) y1 = dispImg.height - 1;
+      
+      chkCornerVal(); // x1, y1, x2, y2だと±の関係があれなので調整
       if(mousePressed == false){ // マウスのボタンを放したら矩形確定
-        rw = x2 - x1;
-        rh = y2 - y1;
-        stateRectmode = 2; // 矩形確定後のモードへ
-        lb_num = ln;
+        rw = rx2 - rx1;
+        rh = ry2 - ry1;
+        if(20 < rw * rh){
+          stateRectmode = 2; // 矩形確定後のモードへ
+          lb_num = ln;
+        }else{
+          stateRectmode = 0;
+        }
       }
-      noFill();
-      strokeWeight(3);
-      stroke(255, 0, 0, 180);
-      rect(rx1, ry1, rx2, ry2); // 入力中の矩形
+      if(0 < stateRectmode){
+        noFill();
+        strokeWeight(3);
+        stroke(255, 0, 0, 180);
+        rect(rx1, ry1, rx2, ry2); // 入力中の矩形
+      }
     }
   }
   
