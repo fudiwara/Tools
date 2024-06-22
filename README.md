@@ -13,8 +13,12 @@ Processingで動作します
 #### combine_dataset.py
 複数に分かれたディレクトリ＆リストを統合します
 
+### mp4から各フレームを画像化するプログラム
+#### mp4_imgs.py
+ffmpegが使えない場合に
+
 ### USBカメラ用のワーピングのテストプログラム
-chk_camera_warp_perspective
+#### chk_camera_warp_perspective
 
 ### MediaPipeによる顔検出結果を画像出力するプログラム
-face_det_output_crop_img.py
+#### face_det_output_crop_img.py
