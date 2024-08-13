@@ -17,7 +17,7 @@ with open(annot_file_name, "r") as f:
         if 1 < len(line.split(" ")):
             lines.append(line)
 
-colors = [(0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
+colors = [(0, 0, 0), (0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
 clr_num = len(colors)
 for idx in range(len(lines)):
     l = lines[idx].split(" ") # スペース区切りのセットリスト
@@ -33,7 +33,7 @@ for idx in range(len(lines)):
         x1 = int(p[2])
         y1 = int(p[3])
         cls_num = int(p[4])
-        cv2.rectangle(img, (x0, y0), (x1, y1), colors[cls_num % clr_num])
+        cv2.rectangle(img, (x0, y0), (x1, y1), colors[cls_num % clr_num], 3)
     
     output_filename = output_dir_path / img_name
     cv2.imwrite(str(output_filename), img)

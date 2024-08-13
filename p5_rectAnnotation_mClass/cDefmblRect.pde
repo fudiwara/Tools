@@ -47,7 +47,7 @@ class defRect{
       if(mousePressed == false){ // マウスのボタンを放したら矩形確定
         rw = rx2 - rx1;
         rh = ry2 - ry1;
-        if(20 < rw * rh){
+        if(450 < rw * rh){ // 一定未満の面積ならクリアする
           stateRectmode = 2; // 矩形確定後のモードへ
           lb_num = ln;
         }else{
