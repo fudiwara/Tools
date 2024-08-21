@@ -6,8 +6,8 @@ sys.dont_write_bytecode = True
 import pathlib
 import cv2
 
-img_dir_path = pathlib.Path(sys.argv[1]) # 画像フォルダ一式のあるパス
-annot_file_name = sys.argv[2] # アノテーションファイル
+annot_file_name = sys.argv[1] # アノテーションファイル
+img_dir_path = pathlib.Path(sys.argv[2]) # 画像フォルダ一式のあるパス
 output_dir_path = pathlib.Path("_ano_rect_imgs") # 矩形描画結果を保存するフォルダ
 if(not output_dir_path.exists()): output_dir_path.mkdir()
 

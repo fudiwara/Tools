@@ -65,7 +65,7 @@ class defRect{
   
   void disp(){
     if(in_prc == false){
-      fill(255, 100);
+      noFill();
       strokeWeight(3);
       stroke(255, 160, 0);
       rect(rx1, ry1, rx2, ry2);
@@ -129,7 +129,7 @@ class defRect{
           in_prc = true;
         }
       }
-      fill(255, 150);
+      noFill();
       strokeWeight(3);
       stroke(255, 160, 0);
       rect(rx1, ry1, rx2, ry2);
@@ -148,7 +148,7 @@ class defRect{
         stateDrawMode = 3;
         in_prc = false;
       }
-      fill(255, 150);
+      noFill();
       strokeWeight(3);
       stroke(255, 160, 0);
       rect(rx1, ry1, rx2, ry2);
@@ -172,7 +172,7 @@ class defRect{
         stateDrawMode = 3;
         in_prc = false;
       }
-      fill(255, 150);
+      noFill();
       strokeWeight(3);
       stroke(255, 0, 0);
       rect(rx1, ry1, rx2, ry2);
