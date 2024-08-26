@@ -24,7 +24,7 @@ for idx in range(len(lines)):
     img_name = l[0]
     img_path = img_dir_path / img_name
     # print(img_path, l)
-    img = cv2.imread(str(img_path), cv2.IMREAD_COLOR) # 
+    img = cv2.imread(str(img_path), cv2.IMREAD_COLOR)
 
     for i in range(len(l) - 1):
         p = l[i + 1].split(",") # カンマ区切りのセットリスト

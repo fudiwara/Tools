@@ -21,7 +21,7 @@ for idx in range(len(lines)):
 
     for i in range(len(l) - 1):
         p = l[i + 1].split(",") # カンマ区切りのセットリスト
-        x0 = int(p[0]) # 実数で読み込む
+        x0 = int(p[0]) # 整数で読み込む
         y0 = int(p[1])
         x1 = int(p[2])
         y1 = int(p[3])
@@ -30,5 +30,5 @@ for idx in range(len(lines)):
         w = x1 - x0
         h = y1 - y0
 
-        if w * h < err_area:
+        if w * h < err_area or w < 0 or h < 0:
             print(f"{img_name} {i}: {x0} {y0} {x1} {y1} {cls_num}")
