@@ -8,8 +8,8 @@ import shutil
 ext = [".jpg", ".jpeg", ".png", ".bmp", ".JPG", ".JPEG", ".PNG", ".BMP"]
 output_dir = pathlib.Path(sys.argv[1]) # コピー先のディレクトリ
 list_combine = sys.argv[2] # 結合後のリストファイル名
-fw = open(list_combine, mode = "w")
 if(not output_dir.exists()): output_dir.mkdir() # ディレクトリ生成
+fw = open(list_combine, mode = "w")
 print("argvs:", len(sys.argv))
 filne_name_list = []
 for n in range(2, int(1 + len(sys.argv) / 2)):
