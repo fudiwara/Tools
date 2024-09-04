@@ -16,6 +16,8 @@ PImage srcImg, dispImg;
 boolean loadImgListFlag = false, frameInputFlag;
 ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
 
+int img_save_count = 0; // 画像保存用の変数
+
 void loadImageDisp(int i){
   String path = img_list[i];
   srcImg = loadImage(path);
@@ -198,6 +200,11 @@ void keyPressed(){
     setRc2Table();
     outputEffDetList();
     println("done ssd & effdet list");
+  }
+  
+  if(key == 'f'){ // 画像として保存
+    save("_cap_" + nf(img_save_count, 3) + ".png");
+    img_save_count ++;
   }
 }
 
