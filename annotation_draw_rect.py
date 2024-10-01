@@ -17,7 +17,7 @@ with open(annot_file_name, "r") as f:
         if 1 < len(line.split(" ")):
             lines.append(line)
 
-colors = [(0, 0, 0), (0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
+colors = [(255, 100, 0), (0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
 clr_num = len(colors)
 for idx in range(len(lines)):
     l = lines[idx].split(" ") # スペース区切りのセットリスト
