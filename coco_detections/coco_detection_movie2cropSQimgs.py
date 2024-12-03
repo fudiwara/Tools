@@ -66,10 +66,10 @@ for f in range(10, 150):
         x1, y1 = int(b[2]), int(b[3]) # 矩形の右上座標
         xc, yc = (x1 + x0) / 2, (y1 + y0) / 2 # 矩形の中心座標
         w_d, h_d = x1 - x0, y1 - y0 # 矩形の横幅、縦幅
-        c_size = h_d * scale_rate if w_d < h_d else w_d * scale_rate # クロップのサイズ
-        cropx0, cropy0 = int(xc - c_size / 2), int(yc - c_size / 2)
-        cropx1, cropy1 = int(xc + c_size / 2), int(yc + c_size / 2)
-        img_crop = img.crop((cropx0, cropy0, cropx1, cropy1))
+        c_size = h_d * scale_rate if w_d < h_d else w_d * scale_rate # クロップの1辺のサイズ
+        cropx0, cropy0 = int(xc - c_size / 2), int(yc - c_size / 2) # クロップの左上
+        cropx1, cropy1 = int(xc + c_size / 2), int(yc + c_size / 2) # クロップの右下
+        img_crop = img.crop((cropx0, cropy0, cropx1, cropy1)) # PILでクロップ画像を得る
         print(x0, y0, x1, y1, xc, yc, cropx0, cropy0, cropx1, cropy1)
         output_file_name = output_path / f"c{f:06}_{i:03}.png"
         img_crop.save(output_file_name)
