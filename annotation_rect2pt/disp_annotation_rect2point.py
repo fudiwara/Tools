@@ -18,6 +18,10 @@ for r in r_csv:
     input_filename = dir_path / r[0]
     img = cv2.imread(str(input_filename))
 
+    if img is None:
+        print("failed: ", input_filename)
+        continue
+
     x0, y0 = int(float(r[1])), int(float(r[2]))
     x1, y1 = int(float(r[3])), int(float(r[4]))
     px, py = int(float(r[5])), int(float(r[6]))
