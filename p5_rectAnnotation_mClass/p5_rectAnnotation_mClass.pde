@@ -84,7 +84,7 @@ void setup(){
 void draw(){
   if(loadImgListFlag){
     image(dispImg, 0, 0);
-    buf_str = "[  " + nf(img_idx, 5) + "  /  " + nf(numImg - 1, 5) + "  ]   ";
+    buf_str = "[  " + nf(img_idx, 5) + "  /  " + nf(numImg - 1, 5) + "  ]   " + nfc(img_scale, 1);
     surface.setTitle(buf_str + img_list[img_idx]);
       
     int i;
@@ -153,7 +153,7 @@ void keyPressed(){
     println(img_scale);
   }
   if(keyCode == LEFT){
-    if(0.4 <= img_scale){
+    if(0.3 <= img_scale){
       img_scale -= 0.1;
       changeScaleImage();
       loadImageDisp(img_idx);

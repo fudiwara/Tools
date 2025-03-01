@@ -11,28 +11,32 @@ void anFile2Table(){
   println(numImg, src.getColumnCount() / 5);
   String img_file_name;
   int src_i = 0; // 追加ファイルがある場合は元のリストとidxが変わるので
-  for(i = 0; i < numImg; i++){
-    img_file_name = src.getString(src_i, 0);
-    //print(img_file_name, img_name_list.get(i));
-    if(img_name_list[i].equals(img_file_name)){
-      print(img_file_name, " ");
-      for(j = 0; j < src.getColumnCount() / 5; j++){
-        boolean isUse = false;
-        for(u = 0; u < 5; u++){
-          int val = src.getInt(src_i, 1 + j * 5 + u);
-          if(val != 0) isUse = true;
-          //print(val, " ");
-        }
-        if(isUse){
+  for(i = 0; i < numImg; i++){ // ディレクトリにあるファイル一式にループ
+    if(src.getRowCount() == src_i){
+      println(img_name_list[i], ": new file");
+    }else{
+      img_file_name = src.getString(src_i, 0); // CSVからファイル名を取得
+      //print(img_file_name, img_name_list.get(i));
+      if(img_name_list[i].equals(img_file_name)){ // ディレクトリとのファイル名一致チェック
+        print(img_file_name, " ");
+        for(j = 0; j < src.getColumnCount() / 5; j++){
+          boolean isUse = false;
           for(u = 0; u < 5; u++){
-            ans.get(i).add(src.getInt(src_i, 1 + j * 5 + u));
+            int val = src.getInt(src_i, 1 + j * 5 + u);
+            if(val != 0) isUse = true;
+            //print(val, " ");
+          }
+          if(isUse){
+            for(u = 0; u < 5; u++){
+              ans.get(i).add(src.getInt(src_i, 1 + j * 5 + u));
+            }
           }
         }
+        println();
+        src_i++;
+      }else{
+        println(img_file_name, ": new file");
       }
-      println();
-      src_i++;
-    }else{
-      println(img_file_name, ": new file");
     }
   }
 }

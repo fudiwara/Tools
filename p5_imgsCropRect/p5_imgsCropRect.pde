@@ -2,11 +2,11 @@
 
 defRect rc;
 
-float img_scale = 1.2;
+float img_scale = 1.2; // 表示するスケール
 String file_exts[] = {".jpg", ".png"}, buf_str;
 File baseDir;
 StringList img_list, img1st_list;
-int img_idx = 0, numImg, label_number, img_id = 0, add_val;
+int img_idx = 0, numImg, label_number, img_id = 0, add_val = 0;
 PImage srcImg, dispImg, cropImg;
 boolean loadImagesFlag = false;
 
@@ -24,7 +24,7 @@ void setup(){
     surface.setLocation(50, 50);
   }
   
-  selectFolder("select directory", "imagesPathDir");
+  selectFolder("select directory", "imagesPathDir"); // imagesPathDir()にて開く
    
   rc = new defRect();
   rectMode(CORNERS);
@@ -48,25 +48,25 @@ void loadImageDisp(int i){
 
 void imagesPathDir(File selDIr){
   int i;
-  baseDir = selDIr;
-  File files[] = listFiles(baseDir);
+  baseDir = selDIr; // ダイアログから得るパス
+  File files[] = listFiles(baseDir); // listFiles関数でファイル一覧を得る
   img_list = new StringList();
   img1st_list = new StringList();
   String buf_name, buf_1st;
   
-  for(i = 0; i < files.length; i++){
-    for(String ext : file_exts){
-      if(files[i].getPath().endsWith(ext)){
-        img_list.append(files[i].getAbsolutePath());
-        buf_name = files[i].getName();
-        buf_1st = buf_name.substring(0, buf_name.lastIndexOf('.'));
-        img1st_list.append(buf_1st);
+  for(i = 0; i < files.length; i++){ // ファイル一覧に対して順に処理する
+    for(String ext : file_exts){ // 拡張子の配列に対してループ
+      if(files[i].getPath().endsWith(ext)){ // ファイルパス末尾が一致するかチェック
+        img_list.append(files[i].getAbsolutePath()); // フルパスのリスト
+        buf_name = files[i].getName(); 
+        buf_1st = buf_name.substring(0, buf_name.lastIndexOf('.')); // stem を得る
+        img1st_list.append(buf_1st); // stemのみのリスト
       }
     }
   }
   img_list.sort();
   img1st_list.sort();
-  numImg = img_list.size();
+  numImg = img_list.size(); // 画像ファイル数
   
   loadImageDisp(0);
   loadImagesFlag = true;

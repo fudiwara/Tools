@@ -14,7 +14,7 @@ print(DEVICE)
 input_file_name = pathlib.Path(sys.argv[1]) # 入力のmp4ファイル
 vc = cv2.VideoCapture(sys.argv[1])
 output_path = pathlib.Path(sys.argv[2]) # 出力先ディレクトリ
-if(not output_path.exists()): output_path.mkdir()
+output_path.mkdir(exist_ok = True)
 
 thDetection = 0.6
 
