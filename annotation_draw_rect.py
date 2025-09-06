@@ -32,10 +32,10 @@ for idx in range(len(lines)):
 
     for i in range(len(l) - 1):
         p = l[i + 1].split(",") # カンマ区切りの各セット
-        x0 = int(p[0]) # 実数で読み込む
-        y0 = int(p[1])
-        x1 = int(p[2])
-        y1 = int(p[3])
+        x0 = int(float(p[0])) # 実数で読み込む
+        y0 = int(float(p[1]))
+        x1 = int(float(p[2]))
+        y1 = int(float(p[3]))
         cls_num = int(p[4])
         cv2.rectangle(img, (x0, y0), (x1, y1), colors[cls_num % clr_num], 1)
 
