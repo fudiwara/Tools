@@ -20,10 +20,10 @@ for idx in range(len(lines)):
 
     for i in range(len(l) - 1):
         p = l[i + 1].split(",") # カンマ区切りの各セット
-        x0 = int(p[0]) # 整数で読み込む
-        y0 = int(p[1])
-        x1 = int(p[2])
-        y1 = int(p[3])
+        x0 = float(p[0]) # 整数で読み込む
+        y0 = float(p[1])
+        x1 = float(p[2])
+        y1 = float(p[3])
         cls_num = int(p[4])
 
         w = x1 - x0
