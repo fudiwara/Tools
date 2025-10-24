@@ -23,7 +23,7 @@ for idx in range(len(lines)):
     l = lines[idx].split(" ") # スペース区切りのセットリスト
     img_name = pathlib.Path(l[0])
     img_path = img_dir_path / img_name
-    print(img_path, l)
+    # print(img_path, l)
     img = cv2.imread(str(img_path), cv2.IMREAD_COLOR)
 
     if img is None:
@@ -52,5 +52,4 @@ for idx in range(len(lines)):
         # cv2.putText(img, disp_text, (tx, ty), cv2.FONT_HERSHEY_DUPLEX, font_scale, (0, 0, 0), int(font_scale), cv2.LINE_AA)
     
     output_filename = output_dir_path / f"{img_name.stem}.jpg"
-    print(output_filename)
     cv2.imwrite(str(output_filename), img)
