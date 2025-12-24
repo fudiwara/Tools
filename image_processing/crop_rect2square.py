@@ -6,8 +6,8 @@ import pathlib
 import cv2
 
 dir_src = pathlib.Path(sys.argv[1]) # 読み込む画像があるディレクトリ
-IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".JPG", ".JPEG", ".PNG", ".BMP"]
-img_paths_src = sorted([p for p in dir_src.glob("**/*") if p.suffix in IMG_EXTS])
+IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp"]
+img_paths_src = sorted([p for p in dir_src.glob("**/*") if p.suffix.lower() in IMG_EXTS])
 
 dir_dst = pathlib.Path(sys.argv[2]) # 出力ディレクトリ
 if(not dir_dst.exists()): dir_dst.mkdir()

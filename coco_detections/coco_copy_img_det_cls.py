@@ -21,8 +21,8 @@ thDetection = 0.9
 model = torchvision.models.detection.fcos_resnet50_fpn(weights="DEFAULT").to(DEVICE).eval()
 data_transforms = torchvision.transforms.Compose([torchvision.transforms.ToTensor()])
 
-IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".JPG", ".JPEG", ".PNG", ".BMP"]
-img_paths = sorted([p for p in src_path.iterdir() if p.suffix in IMG_EXTS])
+IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp"]
+img_paths = sorted([p for p in src_path.iterdir() if p.suffix.lower() in IMG_EXTS])
 
 for image_path in img_paths:
     # 画像の読み込み・変換

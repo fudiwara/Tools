@@ -13,8 +13,8 @@ import cv2
 import numpy as np
 
 dir_path = pathlib.Path(sys.argv[1]) # 画像のディレクトリ
-IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".JPG", ".JPEG", ".PNG", ".BMP"]
-img_paths = sorted([p for p in dir_path.iterdir() if p.suffix in IMG_EXTS])
+IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp"]
+img_paths = sorted([p for p in dir_path.iterdir() if p.suffix.lower() in IMG_EXTS])
 num_files = len(img_paths)
 img_idx = 0; scl_idx = 0; image_scale = 1; scl_param = 0.05
 w_name = "image"

@@ -12,8 +12,8 @@ dir_path = pathlib.Path(sys.argv[2]) # 画像一式のあるディレクトリ
 
 # separate_symbol = "," # ファイル名との区切りがカンマの場合
 separate_symbol = " " # ファイル名との区切りがスペースの場合
-IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".JPG", ".JPEG", ".PNG", ".BMP"]
-dir_img_names = sorted([p.name for p in dir_path.glob("**/*") if p.suffix in IMG_EXTS])
+IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp"]
+dir_img_names = sorted([p.name for p in dir_path.glob("**/*") if p.suffix.lower() in IMG_EXTS])
 
 lines, list_img_names = [], []
 with open(annotation_filepath, "r") as f: # アノテーションファイルのオープン
