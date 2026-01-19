@@ -5,14 +5,14 @@ import sys
 sys.dont_write_bytecode = True
 import pathlib
 import json
-import cv2
+import cv2 as cv
 
 annot_file_name = pathlib.Path(sys.argv[1]) # アノテーションファイル
 base_dir = pathlib.Path(sys.argv[2]) # 画像のあるディレクトリ & 保存先
 class_name = sys.argv[3 : ] # 保存するクラス名
 
 def create_labelme_json(img_path, bounding_boxes):
-    img = cv2.imread(img_path, cv2.IMREAD_COLOR)
+    img = cv.imread(img_path, cv.IMREAD_COLOR)
     imageHeight, imageWidth = img.shape[ : 2]
 
     shapes = []
