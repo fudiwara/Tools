@@ -9,7 +9,7 @@
 
 import sys, pathlib, csv
 sys.dont_write_bytecode = True
-import cv2
+import cv2 as cv
 import numpy as np
 
 dir_path = pathlib.Path(sys.argv[1]) # 画像のディレクトリ
@@ -94,14 +94,14 @@ def disp_img_rectangle_line():
     r_s = 10
     if flag_set: th_width = 2
     else: th_width = 1
-    cv2.rectangle(img, (x0, y0), (x1, y1), (0, 0, 255), thickness = th_width)
-    cv2.circle(img, (x0, y0), 9, (0, 255, 0), thickness = th_width)
-    cv2.circle(img, (x1, y1), 9, (255, 0, 0), thickness = th_width)
+    cv.rectangle(img, (x0, y0), (x1, y1), (0, 0, 255), thickness = th_width)
+    cv.circle(img, (x0, y0), 9, (0, 255, 0), thickness = th_width)
+    cv.circle(img, (x1, y1), 9, (255, 0, 0), thickness = th_width)
     if flag_line or flag_set:
-        cv2.line(img, ((x0 + x1) // 2, (y0 + y1) // 2), (px, py), (0, 0, 0), th_width, cv2.LINE_AA)
-        cv2.circle(img, (px, py), 15, (255, 0, 255), thickness = th_width)
+        cv.line(img, ((x0 + x1) // 2, (y0 + y1) // 2), (px, py), (0, 0, 0), th_width, cv.LINE_AA)
+        cv.circle(img, (px, py), 15, (255, 0, 255), thickness = th_width)
         
-    cv2.imshow(w_name, img)
+    cv.imshow(w_name, img)
 
 def disp_img_reset():
     global img
@@ -110,7 +110,7 @@ def disp_img_reset():
 def onMouse(event, x, y, flag, params):
     global x0, y0, x1, y1, px, py, mx, my, flag_dd, flag_line, flag_set
 
-    if not flag_set and event == cv2.EVENT_LBUTTONDOWN:
+    if not flag_set and event == cv.EVENT_LBUTTONDOWN:
         if flag_line:
             pass
         elif not flag_dd:
@@ -119,7 +119,7 @@ def onMouse(event, x, y, flag, params):
             if not flag_set:
                 flag_dd = True
 
-    if not flag_set and event == cv2.EVENT_MOUSEMOVE:
+    if not flag_set and event == cv.EVENT_MOUSEMOVE:
         if flag_dd:
             x1 = x; y1 = y
             disp_img_rectangle_line()
@@ -129,7 +129,7 @@ def onMouse(event, x, y, flag, params):
             px = x; py = y
             disp_img_rectangle_line()
 
-    elif not flag_set and event == cv2.EVENT_LBUTTONUP:
+    elif not flag_set and event == cv.EVENT_LBUTTONUP:
         if flag_dd:
             # x1 = x; y1 = y
             x1 = mx; y1 = my
@@ -159,18 +159,18 @@ def change_scale_annotation():
         px = int(ann_list[img_idx][4][0] * image_scale)
         py = int(ann_list[img_idx][4][1] * image_scale)
 
-cv2.namedWindow(w_name)
-cv2.setMouseCallback(w_name, onMouse)
+cv.namedWindow(w_name)
+cv.setMouseCallback(w_name, onMouse)
 
 # print(ann_list)
 while True:
-    img = cv2.imread(str(img_paths[img_idx]))
-    img_disp = cv2.resize(img, None, fx = image_scale, fy = image_scale)
-    cv2.imshow(w_name, img_disp)
+    img = cv.imread(str(img_paths[img_idx]))
+    img_disp = cv.resize(img, None, fx = image_scale, fy = image_scale)
+    cv.imshow(w_name, img_disp)
     if flag_set:
         disp_img_rectangle_line()
 
-    key = cv2.waitKey(0)
+    key = cv.waitKey(0)
     if key == 27: # ESC 終了
         break
     elif key == 0: # 上 画面送りを前へ

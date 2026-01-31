@@ -1,7 +1,7 @@
 
 import sys, time
 sys.dont_write_bytecode = True
-import cv2
+import cv2 as cv
 import numpy as np
 from PIL import Image
 import pathlib
@@ -12,7 +12,7 @@ import torchvision
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(DEVICE)
 input_file_name = pathlib.Path(sys.argv[1]) # 入力のmp4ファイル
-vc = cv2.VideoCapture(sys.argv[1])
+vc = cv.VideoCapture(sys.argv[1])
 output_path = pathlib.Path(sys.argv[2]) # 出力先ディレクトリ
 if(not output_path.exists()): output_path.mkdir()
 
@@ -27,20 +27,20 @@ model.eval()
 
 data_transforms = torchvision.transforms.Compose([torchvision.transforms.ToTensor()])
 
-sw = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
-sh = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
+sw = int(vc.get(cv.CAP_PROP_FRAME_WIDTH))
+sh = int(vc.get(cv.CAP_PROP_FRAME_HEIGHT))
 ssize = (sw, sh)
-frame_count = int(vc.get(cv2.CAP_PROP_FRAME_COUNT))
-frame_rate = int(vc.get(cv2.CAP_PROP_FPS))
+frame_count = int(vc.get(cv.CAP_PROP_FRAME_COUNT))
+frame_rate = int(vc.get(cv.CAP_PROP_FPS))
 print(ssize, frame_count, frame_rate)
 
 interval_frame = 30 * 60 * 30 # 分 秒 フレーム
 
 for f in range(0, frame_count, interval_frame):
-    vc.set(cv2.CAP_PROP_POS_FRAMES, f) 
+    vc.set(cv.CAP_PROP_POS_FRAMES, f) 
     ret, frame = vc.read()
     
-    src_img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    src_img = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
     img = Image.fromarray(src_img) # OpenCV形式からPIL形式へ変換
     data = data_transforms(img).unsqueeze(0) # テンソルに変換してから1次元追加
     data = data.to(DEVICE)

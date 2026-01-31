@@ -2,7 +2,7 @@ import sys
 sys.dont_write_bytecode = True
 import pathlib
 import shutil
-import cv2
+import cv2 as cv
 import mediapipe as mp
 
 targetDirPath = pathlib.Path(sys.argv[1]).resolve() # 入力画像のディレクトリ
@@ -28,9 +28,9 @@ exts = [".jpg", ".png", ".jpeg", ".JPG", ".PNG", ".JPEG"]
 for fn in fileList:
     if fn.is_file() and (fn.suffix in exts): # ファイルのみ処理する
         # print(fn)
-        img = cv2.imread(str(fn)) # 画像ファイルの読み込み
+        img = cv.imread(str(fn)) # 画像ファイルの読み込み
 
-        results = face_detection.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)) # mediapipeに処理を渡す
+        results = face_detection.process(cv.cvtColor(img, cv.COLOR_BGR2RGB)) # mediapipeに処理を渡す
         if results.detections:
             outputfilename = dir_face_y / fn.name # 顔検出できた場合
         else:

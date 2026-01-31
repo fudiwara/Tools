@@ -3,7 +3,7 @@
 
 import sys
 import pathlib
-import cv2
+import cv2 as cv
 
 dir_src = pathlib.Path(sys.argv[1]) # 読み込む画像があるディレクトリ
 IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp"]
@@ -13,7 +13,7 @@ dir_dst = pathlib.Path(sys.argv[2]) # 出力ディレクトリ
 if(not dir_dst.exists()): dir_dst.mkdir()
 
 for i in range(len(img_paths_src)): # 読み込みディレクトリ内の全てのファイルについて処理する
-    img = cv2.imread(str(img_paths_src[i]))
+    img = cv.imread(str(img_paths_src[i]))
     h, w, _ = img.shape
     if w > h: # 横に長い場合
         im0 = img[0 : h, 0 : h] # 左
@@ -25,9 +25,9 @@ for i in range(len(img_paths_src)): # 読み込みディレクトリ内の全て
     outputfilename0 = fileList[i].stem + "_0.png"
     outputfilePath = str(dir_dst / outputfilename0)
     print(outputfilePath)
-    cv2.imwrite(outputfilePath, im0)
+    cv.imwrite(outputfilePath, im0)
 
     outputfilename1 = fileList[i].stem + "_1.png"
     outputfilePath = str(dir_dst / outputfilename1)
     print(outputfilePath)
-    cv2.imwrite(outputfilePath, im1)
+    cv.imwrite(outputfilePath, im1)

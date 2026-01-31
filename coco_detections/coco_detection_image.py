@@ -1,7 +1,7 @@
 import sys, os
 sys.dont_write_bytecode = True
 
-import cv2
+import cv2 as cv
 import numpy as np
 from PIL import Image
 import pathlib
@@ -17,7 +17,7 @@ file_name = pathlib.Path(sys.argv[1])
 thDetection = 0.6
 
 # フォント、枠の設定
-font_scale = cv2.getFontScaleFromHeight(cv2.FONT_HERSHEY_DUPLEX, 11, 1)
+font_scale = cv.getFontScaleFromHeight(cv.FONT_HERSHEY_DUPLEX, 11, 1)
 colors = [(255, 100, 0), (0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
 clr_num = len(colors)
 class_names = ["", "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant", "street sign", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe", "hat", "backpack", "umbrella", "shoe", "eye glasses", "handbag", "tie", "suitcase", "frisbee", "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard", "tennis racket", "bottle", "plate", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple", "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch", "potted plant", "bed", "mirror", "dining table", "window", "desk", "toilet", "door", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "microwave", "oven", "toaster", "sink", "refrigerator", "blender", "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush", "hair brush"]
@@ -44,7 +44,7 @@ scores = outputs[0]["scores"].detach().cpu().numpy()
 labels = outputs[0]["labels"].detach().cpu().numpy()
 # print(bboxs, scores, labels)
 
-img = cv2.cvtColor(np.array(img, dtype=np.uint8), cv2.COLOR_RGB2BGR)
+img = cv.cvtColor(np.array(img, dtype=np.uint8), cv.COLOR_RGB2BGR)
 for i in range(len(scores)):
     b = bboxs[i]
     # print(b)
@@ -60,9 +60,9 @@ for i in range(len(scores)):
 
     # text = f" {prd_cls}  {prd_val:.3f} " # クラスIDと確率を表示させる場合
     text = f" {class_names[prd_cls]} " # クラス名のみを表示させる場合
-    (t_w, t_h), baseline = cv2.getTextSize(text, cv2.FONT_HERSHEY_DUPLEX, font_scale, 1) # テキスト部の矩形サイズ取得
-    cv2.rectangle(img, p0, p1, box_col, thickness = 2) # 検出領域の矩形
-    cv2.rectangle(img, (x0, y0 - t_h), (x0 + t_w, y0), box_col, thickness = -1) # テキストの背景の矩形
-    cv2.putText(img, text, p0, cv2.FONT_HERSHEY_DUPLEX, font_scale, (255, 255, 255), 1, cv2.LINE_AA)
+    (t_w, t_h), baseline = cv.getTextSize(text, cv.FONT_HERSHEY_DUPLEX, font_scale, 1) # テキスト部の矩形サイズ取得
+    cv.rectangle(img, p0, p1, box_col, thickness = 2) # 検出領域の矩形
+    cv.rectangle(img, (x0, y0 - t_h), (x0 + t_w, y0), box_col, thickness = -1) # テキストの背景の矩形
+    cv.putText(img, text, p0, cv.FONT_HERSHEY_DUPLEX, font_scale, (255, 255, 255), 1, cv.LINE_AA)
 
-cv2.imwrite(str(file_name.parent / f"{file_name.stem}_det.png"), img)
+cv.imwrite(str(file_name.parent / f"{file_name.stem}_det.png"), img)

@@ -4,7 +4,7 @@
 import sys
 sys.dont_write_bytecode = True
 import pathlib
-import cv2
+import cv2 as cv
 
 annot_file_name = sys.argv[1] # アノテーションファイル
 img_dir_path = pathlib.Path(sys.argv[2]) # 画像フォルダ一式のあるパス
@@ -24,7 +24,7 @@ for idx in range(len(lines)):
     img_name = pathlib.Path(l[0])
     img_path = img_dir_path / img_name
     # print(img_path, l)
-    img = cv2.imread(str(img_path), cv2.IMREAD_COLOR)
+    img = cv.imread(str(img_path), cv.IMREAD_COLOR)
 
     if img is None:
         print("failed: ", img_path.name)
@@ -37,19 +37,19 @@ for idx in range(len(lines)):
         x1 = int(float(p[2]))
         y1 = int(float(p[3]))
         cls_num = int(p[4])
-        cv2.rectangle(img, (x0, y0), (x1, y1), colors[cls_num % clr_num], 1)
+        cv.rectangle(img, (x0, y0), (x1, y1), colors[cls_num % clr_num], 1)
 
         # IDの表示  x0, y0, x1, y1 のサイズに基づいてその内側にテキストを表示する
         # font_s_rate = 0.11
         # disp_text = str(cls_num)
         # font_size = (x1 - x0) * font_s_rate if x1 - x0 < y1 - y0 else (y1 - y0) * font_s_rate
-        # font_scale = cv2.getFontScaleFromHeight(cv2.FONT_HERSHEY_DUPLEX, int(font_size), 1)
-        # (t_w, t_h), baseline = cv2.getTextSize(disp_text, cv2.FONT_HERSHEY_DUPLEX, font_scale, 1) # テキスト部の矩形サイズ取得
+        # font_scale = cv.getFontScaleFromHeight(cv.FONT_HERSHEY_DUPLEX, int(font_size), 1)
+        # (t_w, t_h), baseline = cv.getTextSize(disp_text, cv.FONT_HERSHEY_DUPLEX, font_scale, 1) # テキスト部の矩形サイズ取得
         # cx, cy = x0 + (x1 - x0) / 6, y0 + 4 * (y1 - y0) / 5
         # c_r = int(font_size * 1.4)
-        # cv2.circle(img, (int(cx), int(cy)), c_r, colors[cls_num % clr_num], thickness = -1)
+        # cv.circle(img, (int(cx), int(cy)), c_r, colors[cls_num % clr_num], thickness = -1)
         # tx, ty = int(cx - t_w / 2), int(cy + (t_h) / 2)
-        # cv2.putText(img, disp_text, (tx, ty), cv2.FONT_HERSHEY_DUPLEX, font_scale, (0, 0, 0), int(font_scale), cv2.LINE_AA)
+        # cv.putText(img, disp_text, (tx, ty), cv.FONT_HERSHEY_DUPLEX, font_scale, (0, 0, 0), int(font_scale), cv.LINE_AA)
     
     output_filename = output_dir_path / f"{img_name.stem}.jpg"
-    cv2.imwrite(str(output_filename), img)
+    cv.imwrite(str(output_filename), img)
