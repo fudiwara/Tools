@@ -1,3 +1,5 @@
+# YOLOフォーマットのセグメンテーションアノテーションを画像に描画する
+# python draw_annotation_yolo_seg.py dataset_dir output_dir
 import sys
 sys.dont_write_bytecode = True
 import pathlib
