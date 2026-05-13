@@ -11,7 +11,7 @@ disp_img = img.copy()
 warpM = img.copy()
 
 pnum = 4 # マウスイベントで使う点数
-r_c = 60 # マウスの吸着するサイズ
+r_c = 60 # 円描画するサイズ
 base_pts = [(0, 0), (0, ch), (cw, ch), (cw, 0)]
 with open("warp_pts.txt") as f:
     pts = []

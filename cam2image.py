@@ -5,7 +5,7 @@ import cv2 as cv
 cap = cv.VideoCapture(0)
 
 save_count = 0 # 画像保存時のカウンタ
-while(True):
+while True:
     ret, frame = cap.read()
     
     if not ret: # フレームの読み込みに失敗したら
