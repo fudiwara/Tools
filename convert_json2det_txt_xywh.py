@@ -1,15 +1,14 @@
-# LabelMeのJSONをYOLO形式の検出タスク用TXTファイル風にコンバートするプログラム: 相対じゃなくて絶対の ltrb
+# LabelMeのJSONをYOLO形式の検出タスク用TXTファイル風にコンバートするプログラム: 相対じゃなくて絶対の ltwh
 # 図形は rectangle もしくは polygon (polygonの場合は外接矩形を出す)
+# 同じフォルダのTXTを上書きするので予めフォルダ毎でコピーとかをしておくこと！
 import sys
 sys.dont_write_bytecode = True
 import pathlib
 import json
 
 dataset_dir = pathlib.Path(sys.argv[1]) # jsonファイルがあるディレクトリ
-output_dir = pathlib.Path(sys.argv[2]) # 出力先のディレクトリ
-output_dir.mkdir(exist_ok=True)
 
-class_list = sys.argv[3 : ] # LabelMeでつけたラベル名
+class_list = sys.argv[2 : ] # LabelMeでつけたラベル名
 
 IMG_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".gif", ".webp"] # 画像拡張子
 image_files = sorted([p for p in dataset_dir.glob("**/*") if p.suffix.lower() in IMG_EXTS])
@@ -17,7 +16,7 @@ print(f"image files num: {len(image_files)}")
 
 for img_path in image_files:
     json_file = img_path.with_suffix(".json") # 画像ファイル名と対のJSONファイル
-    output_path = output_dir / pathlib.Path(img_path.name).with_suffix(".txt") # 画像ファイル名と対のTXTファイル
+    output_path = json_file.parent / f"{img_path.stem}.txt" # 画像ファイル名と対のTXTファイル
 
     if not json_file.exists(): # JSONファイルが存在しない場合
         with open(output_path, "w", encoding = "utf-8") as out:
